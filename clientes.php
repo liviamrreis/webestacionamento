@@ -7,18 +7,7 @@
 
 	$clientes = $resultado->fetchAll();
 
-	/*[
-		[
-			'cpf'=>'04080660608',
-			'nome'=>'Livão',
-			'dtNasc'=>'28/11/00'
-		],
-		[
-			'cpf'=>'15107352604',
-			'nome'=>'Livinha',
-			'dtNasc'=>'14/01/02'
-		]
-	];*/
+
  ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -36,6 +25,10 @@
 	<div id="container">
 		<main>
 			<h2>Clientes</h2>
+
+			<p>
+				<a href="cadastrarcliente.php">Link para cadastro</a>
+			</p>
 
 			<table class="tabela-dados">
 					<thead>
