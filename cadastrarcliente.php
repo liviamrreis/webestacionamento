@@ -1,5 +1,33 @@
+<?php
+var_dump($_POST);
 
- <!DOCTYPE html>
+	if (count($_POST)>0){
+		//inserir o banco de dados
+		echo '<br>' . $_POST['CPF'];
+		echo '<br>' . $_POST['nome'];
+		echo '<br>' . $_POST['datanascimento'];
+
+		$banco = "estacionamento";
+		$usuario = "estacionamento";
+		$senha = "joselia";
+
+		$conexao = new PDO("mysql: host = localhost; dbname=${banco}", $usuario, $senha);
+
+		$sql = "INSERT INTO Cliente VALUES (?, ?, ?)";
+		$comando = $conexao->prepare($sql);
+
+		$comando -> execute([
+			$_POST['CPF'],
+			$_POST['nome'],
+			$_POST['datanascimento']
+			]);
+
+		//redireciona para a pagina cliente.php
+		header('Location: clientes.php');
+	}
+
+?>
+  <!DOCTYPE html>
  <html lang="en">
  <head>
  	<meta charset="UTF-8">
@@ -15,7 +43,7 @@
 	<div id="container">
 		<main>
 			<h2>Novo Cliente</h2>
-			<form action="" method="post">
+			<form action="cadastrarcliente.php" method="post">
 
 	 <p>
      	<label for="iCPF">CPF:</label>
@@ -31,10 +59,12 @@
      <p>
      	<label for="idatanascimento">Data Nascimento</label>
      	<input type="date" id= idatanascimento name="datanascimento">
-	
+     </p>
+
+     <P>	
 		<button type="submit">Entrar</button>
 		<button type="reset">Limpar</button>
-
+	</P>
 		</main>
 	</div>
 	<footer>
