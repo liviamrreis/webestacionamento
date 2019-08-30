@@ -13,13 +13,13 @@
 
 		$conexao = new PDO("mysql: host = localhost; dbname=${banco}", $usuario, $senha);
 
-		$sql = "INSERT INTO Cliente VALUES (?, ?, ?)";
+		$sql = "INSERT INTO Cliente VALUES (?, ?)";
 		$comando = $conexao->prepare($sql);
 
 		$sucesso = $comando->execute([
-			$_POST['CPF'],
-			$_POST['nome'],
-			$_POST['datanascimento']
+	
+			$_POST['codmod'],
+			$_POST['desc_2'],
 			]);
 
 		//redireciona para a pagina cliente.php

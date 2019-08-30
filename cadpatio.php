@@ -13,13 +13,13 @@
 
 		$conexao = new PDO("mysql: host = localhost; dbname=${banco}", $usuario, $senha);
 
-		$sql = "INSERT INTO Cliente VALUES (?, ?, ?)";
+		$sql = "INSERT INTO patio VALUES (?, ?, ?)";
 		$comando = $conexao->prepare($sql);
 
 		$sucesso = $comando->execute([
-			$_POST['CPF'],
-			$_POST['nome'],
-			$_POST['datanascimento']
+			$_POST['num'],
+			$_POST['ender'],
+			$_POST['capacidade']
 			]);
 
 		//redireciona para a pagina cliente.php
@@ -27,7 +27,7 @@
 		$mensagem = '';
 	if ($sucesso)
 	{
-		$mensagem = "Cliente cadastrado!";
+		$mensagem = "Patio cadastrado!";
 	}
 	else
 	{
@@ -48,7 +48,7 @@
  <head>
  	<meta charset="UTF-8">
  	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
- 	<title>Novo Cliente - IF Park</title>
+ 	<title>Novo Patio - IF Park</title>
  	<link rel="stylesheet" href="css/estilo.css">
  </head>
  <body>
@@ -67,23 +67,23 @@
 	</header>
 	<div id="container">
 		<main>
-			<h2>Novo Cliente</h2>
-			<form action="cadastrarcliente.php" method="post">
+			<h2>Novo Patio</h2>
+			<form action="cadpatio.php" method="post">
 
 	 <p>
-     	<label for="iCPF">CPF:</label>
-     	<input type="CPF" id= iCPF name="CPF">
+     	<label for="inum">Número:</label>
+     	<input type="num" id= inum name="num">
 
      </p>
 
 	<p>
-         <label for="inome">Nome: </label>
-         <input type="nome" id="inome" name="nome">
+         <label for="iender">Endereço: </label>
+         <input type="ender" id="iender" name="ender">
      </p>    
 
      <p>
-     	<label for="idatanascimento">Data Nascimento</label>
-     	<input type="date" id= idatanascimento name="datanascimento">
+     	<label for="icapacidade">Capacidade de alocação</label>
+     	<input type="capacidade" id= capacidade name="capacidade">
      </p>
 
      <P>	

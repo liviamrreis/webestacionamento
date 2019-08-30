@@ -13,13 +13,14 @@
 
 		$conexao = new PDO("mysql: host = localhost; dbname=${banco}", $usuario, $senha);
 
-		$sql = "INSERT INTO Cliente VALUES (?, ?, ?)";
+		$sql = "INSERT INTO veiculo VALUES (?, ?, ?, ?)";
 		$comando = $conexao->prepare($sql);
 
 		$sucesso = $comando->execute([
-			$_POST['CPF'],
-			$_POST['nome'],
-			$_POST['datanascimento']
+			$_POST['placa'],
+			$_POST['modelo_codmod'],
+			$_POST['cliente_cpf'],
+			$_POST['cor']
 			]);
 
 		//redireciona para a pagina cliente.php
@@ -27,7 +28,7 @@
 		$mensagem = '';
 	if ($sucesso)
 	{
-		$mensagem = "Cliente cadastrado!";
+		$mensagem = "Veiculo cadastrado!";
 	}
 	else
 	{
@@ -37,7 +38,7 @@
 	// uso um cookie para passar a mensagem para a página de clientes
 	setcookie('mensagem', $mensagem);
 	// redireciona para a página clientes.php
-	header('Location: clientes.php');
+	header('Location: veiculos.php');
 
 
 	}
@@ -48,7 +49,7 @@
  <head>
  	<meta charset="UTF-8">
  	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
- 	<title>Novo Cliente - IF Park</title>
+ 	<title>Novo Veículo - IF Park</title>
  	<link rel="stylesheet" href="css/estilo.css">
  </head>
  <body>
@@ -67,29 +68,34 @@
 	</header>
 	<div id="container">
 		<main>
-			<h2>Novo Cliente</h2>
-			<form action="cadastrarcliente.php" method="post">
+			<h2>Novo Veículo</h2>
+			<form action="cadveiculo.php" method="post">
 
 	 <p>
-     	<label for="iCPF">CPF:</label>
-     	<input type="CPF" id= iCPF name="CPF">
+     	<label for="iplaca">Placa:</label>
+     	<input type="placa" id= iplaca name="placa">
 
      </p>
 
 	<p>
-         <label for="inome">Nome: </label>
-         <input type="nome" id="inome" name="nome">
+         <label for="imodelo_codmod">Código do Modelo: </label>
+         <input type="modelo_codmod" id="imodelo_codmod" name="modelo_codmod">
      </p>    
 
      <p>
-     	<label for="idatanascimento">Data Nascimento</label>
-     	<input type="date" id= idatanascimento name="datanascimento">
+     	<label for="icliente_cpf">CPF do Cliente</label>
+     	<input type="cliente_cpf" id= icliente_cpf name="cliente_cpf">
+     </p>
+     <p>
+     	<label for="icor">Cor</label>
+     	<input type="cor" id= icor name="cor">
      </p>
 
      <P>	
 		<button type="submit">Entrar</button>
 		<button type="reset">Limpar</button>
 	</P>
+
 		</main>
 	</div>
 	<footer>
