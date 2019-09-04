@@ -1,24 +1,17 @@
 <?php 
-
 	$conexao = new PDO("mysql:host=localhost;dbname=estacionamento", "estacionamento", "joselia");
-
 	$sql = "SELECT * FROM Modelo";
 	$resultado = $conexao->query($sql);
-
 	$modelos = $resultado->fetchAll();
-
-	/*[
-		[
-			'cpf'=>'04080660608',
-			'nome'=>'Livão',
-			'dtNasc'=>'28/11/00'
-		],
-		[
-			'cpf'=>'15107352604',
-			'nome'=>'Livinha',
-			'dtNasc'=>'14/01/02'
-		]
-	];*/
+	$mensagem = "";
+	if (isset($_COOKIE['mensagem']))
+	{
+		$mensagem = $_COOKIE['mensagem'];
+		// depois que exibo a mensagem, devo retirá-la
+		// dos cookies.
+		setcookie('mensagem', '', 1);
+	}
+	
  ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -43,21 +36,27 @@
 		</nav>
 	</header>
 	<div id="container">
+	<p><a href="cad_modelo.php">Pagina de cadastro de modelos</a></p>
+			<?php if(!empty($mensagem)): ?>
+				<div id="mensagem">
+					<?= $mensagem; ?>
+				</div>
+			<?php endif; ?>
 		<main>
 			<h2>Modelos</h2>
 
 			<table class="tabela-dados">
 					<thead>
 						<tr>
-							<th>Código</th>
-							<th>Descrição</th>
-							
+							<th>código modelo</th>
+							<th>descrição</th>
+						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($modelos as $modelos): ?>
+						<?php foreach ($modelos as $modelo): ?>
 						<tr>
-							<td><?= $modelos['codmod'] ?></td>
-							<td><?= $modelos['desc_2'] ?></td>
+							<td><?= $modelo['codmod'] ?></td>
+							<td><?= $modelo['desc_2'] ?></td>
 							
 						</tr>
 						<?php endforeach; ?>
@@ -68,6 +67,3 @@
 	<footer>
 		<p>Desenvolvido com ♡ pelo Terceirão 2019.</p>
 	</footer>
-
- </body>
- </html>
